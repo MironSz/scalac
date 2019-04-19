@@ -1,15 +1,15 @@
 # scalac
-Project done as part of recrutation process to scalac. 
+Project done as part of recrutation process to scalac. <br /> 
 
-Unimplemented parts:
--Logging system (currently I only print whatever necessary)
--Tests (I put destdescriptions in test dir)
--Parsing JSON to Config
+Unimplemented parts: <br /> 
+-Logging system (currently I only print whatever necessary)<br /> 
+-Tests (I put destdescriptions in test dir)<br /> 
+-Parsing JSON to Config<br /> 
 
-Few thoughts about task:
--Distributing system through several machines may be hard (sending picture may be slower than calculating it's brightness)
--Processing single picture in parrarel is possible, however it wouldn't bring much speedup overall (one picture would be processed faster, but fewer pictures would be processed in parrarel)
--To few example data to train simple ML dotel for detecting brightness
+Few thoughts about task:<br /> 
+-Distributing system through several machines may be hard (sending picture may be slower than calculating it's brightness)<br /> 
+-Processing single picture in parrarel is possible, however it wouldn't bring much speedup overall (one picture would be processed faster, but fewer pictures would be processed in parrarel)<br /> 
+-To few example data to train simple ML motel for detecting brightness<br /> 
 
 Task:
 
