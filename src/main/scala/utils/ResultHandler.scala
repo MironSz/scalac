@@ -5,14 +5,16 @@ import java.nio.file.{Files, StandardCopyOption}
 
 //ResultHandler decides what to do with picture after calculating brightness
 abstract class ResultHandler {
-  def handle(filename: String, brightness: Int)
+  def handle(filename: String, brightness: Int, config: Config)
 }
 
-class CopyResultHandler(treshold: Int, inputDir: String, outputDir: String)
-    extends ResultHandler {
-  override def handle(filename: String, brightness: Int) = {
+class CopyResultHandler extends ResultHandler {
+  override def handle(filename: String, brightness: Int, config: Config) = {
+    val inputDir = config.inputDir
+    val outputDir = config.outputDir
     val d1 = new File(inputDir + "/" + filename).toPath
-    val infix = (if (brightness >= treshold) "_dark_" else "_bright_") + brightness
+    val infix = (if (brightness >= config.bright_treshold) "_dark_"
+                 else "_bright_") + brightness
 
     val resultPath = outputDir + "/" + filename.replaceFirst(
       "(.[a-zA-Z0-9])",
@@ -24,10 +26,10 @@ class CopyResultHandler(treshold: Int, inputDir: String, outputDir: String)
   }
 }
 
-class PrintResultHandler(treshold: Int) extends ResultHandler {
-  override def handle(filename: String, brightness: Int) = {
+class PrintResultHandler extends ResultHandler {
+  override def handle(filename: String, brightness: Int, config: Config) = {
     println(
-      "Classified " + filename + " brignthness as " + brightness + " too dark:" + (brightness >= treshold)
+      "Classified " + filename + " brignthness as " + brightness + " too dark:" + (brightness >= config.bright_treshold)
     )
   }
 }

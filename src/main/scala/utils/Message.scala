@@ -6,4 +6,4 @@ case class ClassifyRequest(file: File,
                            outputDir: String,
                            darkClassifier: DarknessMetric)
 case class Result(filename: String, brightness: Int)
-case class BeginClassifying(inputDir: String, outputDir: String)
+case class BeginClassifying(config: Config)

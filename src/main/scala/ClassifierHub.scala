@@ -16,8 +16,8 @@ class ClassifierHub(config: Config) extends Actor {
   var filesToClassify: Int = 0
   var allFilesQueued: Boolean = false
 
-  def beginClassyfing(inputDir: String, outputDir: String) = {
-    val d = new File(inputDir)
+  def beginClassyfing(config:Config) = {
+    val d = new File(config.inputDir)
 
     val workerRouter = context.actorOf(
       Props[ClassifierActor].withRouter(BalancingPool(config.nrOfThreads)),
@@ -31,15 +31,15 @@ class ClassifierHub(config: Config) extends Actor {
     val files = d.listFiles.filter(_.isFile).toList.filter(checkExtension)
     filesToClassify = files.length
     for (file <- files)
-      workerRouter ! ClassifyRequest(file, outputDir, config.darkClassifier)
+      workerRouter ! ClassifyRequest(file, config.outputDir, config.darkClassifier)
 
   }
 
   override def receive: Receive = {
-    case BeginClassifying(inputDir, outputDir) =>
-      beginClassyfing(inputDir, outputDir)
+    case BeginClassifying(config) =>
+      beginClassyfing(config)
     case Result(filename, brightness) => {
-      config.resultHandler.handle(filename, brightness)
+      config.resultHandler.handle(filename, brightness,config)
       //I think only one thread handles ClassifierHub,
       //therefore decrementing filesToClassify should be safe
       filesToClassify = filesToClassify - 1

@@ -4,22 +4,24 @@ import utils._
 //Main function. It takes paths to inputDir and outputDirs as arguments.
 //In future optional third argument (path to JSON config) should be supported
 object ClassifyDarkness {
-  def extractConfig(pathToConfig: String, inputDir: String, outputDir: String) =
-    Config.JSONtoConfig(pathToConfig, inputDir, outputDir)
+  def extractConfig(pathToConfig: String) =
+    Config.JSONtoConfig(pathToConfig)
 
-  def classify(inputDir: String, outputDir: String) = {
+  def classify(config:Config) = {
+
     val system = ActorSystem("DarknessClassyfingSystem")
     val classifierHub =
       system.actorOf(
-        Props(new ClassifierHub(extractConfig("", inputDir, outputDir)))
+        Props(new ClassifierHub(config))
       )
-    classifierHub ! BeginClassifying(inputDir, outputDir)
+    classifierHub ! BeginClassifying(config)
   }
 
   def main(args: Array[String]): Unit = {
-    val inputDir = args(0)
-    val outputDir = args(1)
+	  val config = extractConfig("this path is currently unused")
+    val inputDir = config.inputDir
+    val outputDir = config.outputDir
     println("Classyfing pictures from " + inputDir + " to " + outputDir)
-    classify(inputDir, outputDir)
+    classify(config)
   }
 }
