@@ -1,27 +1,18 @@
 import akka.actor.{ActorSystem, Props}
-import utils.{DarkClassifier, MeanClassifier}
+import utils._
 
-case class Config(nrOfThreads: Int,
-                  acceptedExtensions: List[String],
-                  darkClassifier: DarkClassifier,
-                  bright_treshold: Int,
-                  resultHandler: ResultHandler)
-
+//Main function. It takes paths to inputDir and outputDirs as arguments.
+//In future optional third argument (path to JSON config) should be supported
 object ClassifyDarkness {
-  //TODO this should be done using some JSON parsing
-  def extractConfig(pathToConfig: String) =
-    new Config(
-      nrOfThreads = 2,
-      List("jpg", "png"),
-      new MeanClassifier,
-	    bright_treshold = 80,
-      new PrintResultHandler(80)
-    )
+  def extractConfig(pathToConfig: String, inputDir: String, outputDir: String) =
+    Config.JSONtoConfig(pathToConfig, inputDir, outputDir)
 
   def classify(inputDir: String, outputDir: String) = {
-    val system = ActorSystem("DarknessClassyfyingSystem")
+    val system = ActorSystem("DarknessClassyfingSystem")
     val classifierHub =
-      system.actorOf(Props(new ClassifierHub(extractConfig(""))))
+      system.actorOf(
+        Props(new ClassifierHub(extractConfig("", inputDir, outputDir)))
+      )
     classifierHub ! BeginClassifying(inputDir, outputDir)
   }
 
@@ -31,5 +22,4 @@ object ClassifyDarkness {
     println("Classyfing pictures from " + inputDir + " to " + outputDir)
     classify(inputDir, outputDir)
   }
-
 }

@@ -3,14 +3,9 @@ import java.io.File
 
 import akka.actor.Actor
 import javax.imageio.ImageIO
-import utils.{DarkClassifier, RGBPoint}
-
-case class ClassifyRequest(file: File,
-                           outputDir: String,
-                           darkClassifier: DarkClassifier)
-case class Result(filename: String, brightness: Int)
-
-class ClassifyActor extends Actor {
+import utils.{ClassifyRequest, DarknessMetric, RGBPoint, Result}
+//ClassifierActor classifies brightness of picture using DarknessMetric's functionality.
+class ClassifierActor extends Actor {
 
   def getPixelsFromPicture(pictureFile: File) = {
     def rgbToTriple(rgb: Int): (Int, Int, Int) =
@@ -32,9 +27,9 @@ class ClassifyActor extends Actor {
 
   def classify(file: File,
                outputDir: String,
-               darkClassifier: DarkClassifier) = {
+               darkClassifier: DarknessMetric) = {
     val brightness =
-      darkClassifier.calculateBrightness(getPixelsFromPicture(file))
+      darkClassifier.calculateDarkness(getPixelsFromPicture(file))
 
     Result(file.getName, brightness)
   }
