@@ -18,7 +18,8 @@ object ClassifyDarkness {
   }
 
   def main(args: Array[String]): Unit = {
-	  val config = extractConfig("this path is currently unused")
+	  val defaultPathToConfig = "deafault_config.json"
+	  val config = if(args.length>0) extractConfig(args(0)) else extractConfig(defaultPathToConfig)
     val inputDir = config.inputDir
     val outputDir = config.outputDir
     println("Classyfing pictures from " + inputDir + " to " + outputDir)

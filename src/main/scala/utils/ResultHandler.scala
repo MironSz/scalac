@@ -9,6 +9,7 @@ abstract class ResultHandler {
 }
 
 class CopyResultHandler extends ResultHandler {
+	override def toString: String = "CopyResultHandler"
   override def handle(filename: String, brightness: Int, config: Config) = {
     val inputDir = config.inputDir
     val outputDir = config.outputDir
@@ -27,6 +28,7 @@ class CopyResultHandler extends ResultHandler {
 }
 
 class PrintResultHandler extends ResultHandler {
+	override def toString: String = "PrintResultHandler"
   override def handle(filename: String, brightness: Int, config: Config) = {
     println(
       "Classified " + filename + " brignthness as " + brightness + " too dark:" + (brightness >= config.bright_treshold)

@@ -1,10 +1,12 @@
 # scalac
 Project done as part of recrutation process to scalac. <br /> 
 
+Path to configuration json file can be given as argument. If no path is passed, program will use default_config.json
+
 Unimplemented parts: <br /> 
 -Logging system (currently I only print whatever necessary)<br /> 
--Tests (I put destdescriptions in test dir)<br /> 
--Parsing JSON to Config<br /> 
+-Tests (I put descriptions in test dir)<br /> 
+-Parsing JSON to Config (implemented after deadline)<br /> 
 
 Few thoughts about task:<br /> 
 -Distributing system through several machines may be hard (sending picture may be slower than calculating it's brightness)<br /> 

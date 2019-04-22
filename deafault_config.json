@@ -1,0 +1,16 @@
+{
+  "acceptedExtensions": [
+    "jpg",
+    "png"
+  ],
+  "bright_treshold": 80,
+  "darkClassifier": {
+    "metric": "MeanDarknessMetric"
+  },
+  "inputDir": "/home/miron/scala/scalac/src/test/photos/test",
+  "nrOfThreads": 2,
+  "outputDir": "/home/miron/scala/scalac/src/test/photos/test",
+  "resultHandler": {
+    "resultHandler": "CopyResultHandler"
+  }
+}

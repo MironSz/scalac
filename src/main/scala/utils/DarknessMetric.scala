@@ -6,6 +6,7 @@ abstract class DarknessMetric {
 }
 
 class MeanDarknessMetric extends DarknessMetric {
+  override def toString: String = "MeanDarknessMetric"
   override def calculateDarkness(pixels: IndexedSeq[RGBPoint]) = {
     val floatList: IndexedSeq[Float] =
       pixels.map(rgb => rgb.r + rgb.g + rgb.b).map(_.toFloat)

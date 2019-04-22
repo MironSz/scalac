@@ -38,6 +38,9 @@ class ClassifierHub(config: Config) extends Actor {
   override def receive: Receive = {
     case BeginClassifying(config) =>
       beginClassyfing(config)
+	    if (filesToClassify == 0) {
+		    context.system.terminate()
+	    }
     case Result(filename, brightness) => {
       config.resultHandler.handle(filename, brightness,config)
       //I think only one thread handles ClassifierHub,
