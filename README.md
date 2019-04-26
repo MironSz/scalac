@@ -1,17 +1,17 @@
 # scalac
-Project done as part of recrutation process to scalac. <br /> 
+Project done as part of recrutation process to scalac.    
 
 Path to configuration json file can be given as argument. If no path is passed, program will use default_config.json
 
-Unimplemented parts: <br /> 
--Logging system (currently I only print whatever necessary)<br /> 
--Tests (I put descriptions in test dir)<br /> 
--Parsing JSON to Config (implemented after deadline)<br /> 
+Unimplemented parts:    
+-Logging system (currently I only print whatever necessary)   
+-Tests (I put descriptions in test dir)   
+-Parsing JSON to Config (implemented after deadline)   
 
-Few thoughts about task:<br /> 
--Distributing system through several machines may be hard (sending picture may be slower than calculating it's brightness)<br /> 
--Processing single picture in parrarel is possible, however it wouldn't bring much speedup overall (one picture would be processed faster, but fewer pictures would be processed in parrarel)<br /> 
--To few example data to train simple ML motel for detecting brightness<br /> 
+Few thoughts about task:   
+-Distributing system through several machines may be hard (sending picture may be slower than calculating it's brightness)   
+-Processing single picture in parrarel is possible, however it wouldn't bring much speedup overall (one picture would be processed faster, but fewer pictures would be processed in parrarel)   
+-To few example data to train simple ML model for detecting brightness   
 
 Task:
 
